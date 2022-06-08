@@ -1,9 +1,9 @@
-async function sendFetchForm({url, formData}) {
+async function sendFetchForm({url, formData, method}) {
     const plainFormData = Object.fromEntries(formData.entries());
     const formDataJsonString = JSON.stringify(plainFormData);
 
     const fetchOptions = {
-        method: "POST",
+        method: method,
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -33,7 +33,8 @@ async function handleFormSubmit(event) {
 
     try {
         const formData = new FormData(form);
-        const responseData = await sendFetchForm({url, formData});
+        const method = formData.get("_method");
+        const responseData = await sendFetchForm({url, formData, method});
 
         console.log({responseData});
     } catch (error) {

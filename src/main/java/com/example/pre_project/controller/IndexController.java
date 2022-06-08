@@ -40,12 +40,12 @@ public class IndexController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/users/{id}/edit")
+    @PutMapping("/users/{id}")
     public ResponseEntity<HttpStatus> updateUser(@RequestBody EditUserDTO editUserDTO) {
         return userService.update(userMapper.mappingEditUser(editUserDTO));
     }
 
-    @PostMapping("/users/{id}/delete")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         userService.delete(userService.getById(id));
         return ResponseEntity.ok().build();

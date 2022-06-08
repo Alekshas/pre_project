@@ -23,8 +23,8 @@ async function editUser(event) {
         id: 'editModal' + event.target.dataset.id,
         title: 'Edit user',
         formID: 'editFORM',
-        formURL: 'http:\/\/localhost:8080\/users\/' + event.target.dataset.id + '\/edit\/',
-        formMethod: 'POST',
+        formURL: 'http:\/\/localhost:8080\/users\/' + event.target.dataset.id,
+        formMethod: 'PUT',
         body: `
               <label for="id0"><b>ID</b></label>
                     <input name="id" type="text" class="form-control"

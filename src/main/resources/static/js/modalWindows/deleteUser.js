@@ -23,8 +23,8 @@ async function deleteUser(event) {
         id: 'deleteModal' + event.target.dataset.id,
         title: 'Delete user',
         formID: 'deleteFORM',
-        formURL: 'http:\/\/localhost:8080\/users\/' + event.target.dataset.id + '\/delete\/',
-        formMethod: 'POST',
+        formURL: 'http:\/\/localhost:8080\/users\/' + event.target.dataset.id,
+        formMethod: 'DELETE',
         body: `
               <label for="id0"><b>ID</b></label>
                     <input name="id" type="text" class="form-control"
