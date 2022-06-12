@@ -1,7 +1,6 @@
 package com.example.pre_project.mapping;
 
-import com.example.pre_project.DTO.CreateUserDTO;
-import com.example.pre_project.DTO.EditUserDTO;
+import com.example.pre_project.DTO.UserDTO;
 import com.example.pre_project.model.Role;
 import com.example.pre_project.model.User;
 import org.springframework.stereotype.Component;
@@ -11,30 +10,30 @@ import java.util.Set;
 
 @Component
 public class UserMapper {
-    public User mappingEditUser(EditUserDTO editUserDTO){
+    public User mappingEditUser(UserDTO userDTO){
 
         Set<Role> roles = new HashSet<>();
-        if (editUserDTO.getAdmin() != null){
+        if (userDTO.getAdmin() != null){
             roles.add(new Role(1L, "ADMIN"));
         }
-        if (editUserDTO.getUser() != null){
+        if (userDTO.getUser() != null){
             roles.add(new Role(2L, "USER"));
         }
-        User user = new User(editUserDTO.getId(),editUserDTO.getName(), editUserDTO.getLastname(), editUserDTO.getAge(),
-                editUserDTO.getEmail(), editUserDTO.getPassword(), roles);
+        User user = new User(userDTO.getId(),userDTO.getName(), userDTO.getLastname(), userDTO.getAge(),
+                userDTO.getEmail(), userDTO.getPassword(), roles);
         return user;
     }
-    public User mappingCreateUser(CreateUserDTO createUserDTO){
+    public User mappingCreateUser(UserDTO userDTO){
         Set<Role> roles = new HashSet<>();
 
-        if (createUserDTO.getAdmin() != null){
+        if (userDTO.getAdmin() != null){
             roles.add(new Role(1L, "ADMIN"));
         }
-        if (createUserDTO.getUser() != null){
+        if (userDTO.getUser() != null){
             roles.add(new Role(2L, "USER"));
         }
-        User user = new User(createUserDTO.getName(), createUserDTO.getLastname(), createUserDTO.getAge(),
-                createUserDTO.getEmail(), createUserDTO.getPassword(), roles);
+        User user = new User(userDTO.getName(), userDTO.getLastname(), userDTO.getAge(),
+                userDTO.getEmail(), userDTO.getPassword(), roles);
         return user;
     }
 

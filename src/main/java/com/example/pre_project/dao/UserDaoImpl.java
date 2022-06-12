@@ -1,12 +1,8 @@
 package com.example.pre_project.dao;
 
 
-import com.example.pre_project.controller.UserController;
+import com.example.pre_project.model.Role;
 import com.example.pre_project.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,8 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +35,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> getAllAdminUsers() {
+        ArrayList<User> allUsers = (ArrayList<User>) getAllUsers();
+        ArrayList<User> adminUsers = new ArrayList<>();
+        for (User user : allUsers) {
+            if(user.getRoles().contains(new Role(1L,"ADMIN"))){
+                adminUsers.add(user);
+            }
+        }
+        return adminUsers;
+    }
+
+    @Override
     public void add(User user) {
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         entityManager.persist(user);
@@ -51,29 +58,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> update(User user) {
-
-        if (Objects.equals(user.getPassword(), "")) {
-            user.setPassword(getById(user.getId()).getPassword());
-        } else {
-            user.setPassword(passwordEncoder().encode(user.getPassword()));
-        }
+    public void update(User user) {
         entityManager.merge(user);
-
-        if (user.getId() == getCurrentUser().getId() && !user.getRoles().equals(getCurrentUser().getRoles())) {
-            SecurityContextHolder.getContext().setAuthentication(null);
-
-            URI logout = null;
-            try {
-                logout = new URI("http://localhost:8080/logout");
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setLocation(logout);
-            return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
-        }
-        return ResponseEntity.ok().build();
     }
 
 

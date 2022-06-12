@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column
     private int age;
 
+    @Column
+    private boolean wantToBeAdmin;
+
     @Column(unique = true)
     private String email;//unique
 

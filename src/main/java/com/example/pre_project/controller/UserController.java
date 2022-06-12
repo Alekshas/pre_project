@@ -1,29 +1,64 @@
 package com.example.pre_project.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.pre_project.DTO.CastToAdminDTO;
+import com.example.pre_project.DTO.UserDTO;
+import com.example.pre_project.mapping.UserMapper;
+import com.example.pre_project.model.User;
+import com.example.pre_project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class UserController {
 
-    @GetMapping("/login-page")
-    public String showSignUpForm() {
-        return "login.html";
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @GetMapping("/users/current")
+    public User getCurrentUser() { return userService.getCurrentUser(); }
+
+    @PostMapping("/users/current")
+    public ResponseEntity<HttpStatus> requestToCastUserToAdmin() {
+        return userService.setWantToBeAdmin();
     }
 
-    @GetMapping("/admin-page")
-    public String showAdminPage() {
-        return "index.html";
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable("id") long id) {
+        return userService.getById(id);
     }
 
-    @GetMapping("/user-page")
-    public String showUserPage() {
-        return "user.html";
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/logout")
-    public String logoutUser() {
-        return "login.html";
+    @PostMapping("/users")
+    public ResponseEntity<HttpStatus> saveUser(@RequestBody UserDTO userDTO) {
+        userService.add(userMapper.mappingCreateUser(userDTO));
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody CastToAdminDTO castToAdminDTO) {
+        return userService.castToAdmin(castToAdminDTO);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody UserDTO userDTO) {
+        return userService.update(userMapper.mappingEditUser(userDTO));
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+        userService.delete(userService.getById(id));
+        return ResponseEntity.ok().build();
     }
 
 }

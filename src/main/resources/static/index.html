@@ -57,6 +57,10 @@
                                                     aria-controls="nav-profile" aria-selected="false">New
                                                 user
                                             </button>
+                                            <button class="nav-link" id="nav-add-admin-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav-add-admin" type="button" role="tab"
+                                                    aria-controls="nav-add-admin" aria-selected="false">Cast user to admin
+                                            </button>
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
@@ -94,8 +98,8 @@
                                         <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                              aria-labelledby="nav-profile-tab">
                                             <div class="col-md bg-white border">
-                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                                                <form class="offset-md-4 col-md-4 mt-3 mb-4" id="newUserForm" align="center"
+                                                <form class="offset-md-4 col-md-4 mt-3 mb-4" id="newUserForm"
+                                                      align="center"
                                                       method="POST" action="http://localhost:8080/users">
                                                     <input type="hidden" name="_method" value="POST">
                                                     <label for="name"><b>First name</b></label>
@@ -118,10 +122,10 @@
                                                     <input name="password" type="password"
                                                            class="form-control" id="password"/>
                                                     <br>
-                                                    <label>Admin <input type="checkbox" name="admin" id ="ADMIN"
+                                                    <label>Admin <input type="checkbox" name="admin" id="ADMIN"
                                                                         value="ADMIN">
                                                     </label>
-                                                    <label>User<input type="checkbox" name="user" id ="USER"
+                                                    <label>User<input type="checkbox" name="user" id="USER"
                                                                       value="USER">
                                                     </label>
                                                     <br><br>
@@ -131,6 +135,38 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="tab-pane fade" id="nav-add-admin" role="tabpanel"
+                                             aria-labelledby="nav-add-admin-tab">
+                                            <div class="col-md bg-white border">
+                                                <div class="tab-pane fade show active" id="wantToBeAdmin">
+                                                    <div class="gray border">
+                                                        <h3 style="text-align: left; margin: 1%">Users who want to be
+                                                            admin</h3>
+                                                    </div>
+                                                    <div style="margin:1% ">
+
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>First Name</th>
+                                                                <th>Last Name</th>
+                                                                <th>Age</th>
+                                                                <th>Email</th>
+                                                                <th>Role</th>
+                                                                <th>Make admin</th>
+                                                                <th>Dismiss</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="wantToBeAdminList">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
 
@@ -177,7 +213,9 @@
 
 </div>
 <!--</section>-->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8= sha256-T+aPohYXbm0fRYDpJLr+zJ9RmYTswGsahAoIsNiMld4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8= sha256-T+aPohYXbm0fRYDpJLr+zJ9RmYTswGsahAoIsNiMld4="
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -189,6 +227,7 @@
 <script src="js/modalWindows/control-modal.js"></script>
 
 <script src="js/showUserTable.js"></script>
+<script src="js/showUserWhantToBeAdminTable.js"></script>
 <script src="js/modalWindows/editUser.js"></script>
 <script src="js/modalWindows/deleteUser.js"></script>
 
