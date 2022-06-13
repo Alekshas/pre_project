@@ -79,13 +79,12 @@
                                             $("#beAdminButton").click(function (e) {
                                                 e.preventDefault();
                                                 $.ajax({ //отправляем данные на сервер.
-                                                    type: 'POST',
-                                                    url: 'http://localhost:8080/users/current',
+                                                    type: 'GET',
+                                                    url: 'http://localhost:8080/promoteRquest',
                                                     async: true,
                                                     dataType: "json",
                                                     success: function () {
-                                                        $('#message').html('<p id="message" class="alert alert-success my-3">Уведомление отправленно администраторам!</p>');
-                                                        // console.log(data);
+                                                        alert("Уведомление отправленно администраторам!");
 
                                                     }
                                                 });

@@ -1,6 +1,5 @@
 package com.example.pre_project.controller;
 
-import com.example.pre_project.DTO.CastToAdminDTO;
 import com.example.pre_project.DTO.UserDTO;
 import com.example.pre_project.mapping.UserMapper;
 import com.example.pre_project.model.User;
@@ -24,11 +23,6 @@ public class UserController {
     @GetMapping("/users/current")
     public User getCurrentUser() { return userService.getCurrentUser(); }
 
-    @PostMapping("/users/current")
-    public ResponseEntity<HttpStatus> requestToCastUserToAdmin() {
-        return userService.setWantToBeAdmin();
-    }
-
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable("id") long id) {
         return userService.getById(id);
@@ -45,10 +39,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/users")
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody CastToAdminDTO castToAdminDTO) {
-        return userService.castToAdmin(castToAdminDTO);
-    }
 
     @PutMapping("/users/{id}")
     public ResponseEntity<HttpStatus> updateUser(@RequestBody UserDTO userDTO) {

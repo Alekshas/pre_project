@@ -1,6 +1,6 @@
 package com.example.pre_project.service;
 
-import com.example.pre_project.DTO.CastToAdminDTO;
+import com.example.pre_project.DTO.PromoteRequest;
 import com.example.pre_project.dao.UserDao;
 import com.example.pre_project.model.Role;
 import com.example.pre_project.model.User;
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> castToAdmin(CastToAdminDTO castToAdminDTO) {
+    public ResponseEntity<HttpStatus> castToAdmin(PromoteRequest castToAdminDTO) {
         User user = getById(castToAdminDTO.getId());
         if(!Objects.isNull(castToAdminDTO.getAdmin()) && castToAdminDTO.getAdmin().equals("ADMIN")){
             user.getRoles().add(new Role(1L,"ADMIN"));

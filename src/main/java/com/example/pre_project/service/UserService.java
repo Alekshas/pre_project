@@ -1,6 +1,6 @@
 package com.example.pre_project.service;
 
-import com.example.pre_project.DTO.CastToAdminDTO;
+import com.example.pre_project.DTO.PromoteRequest;
 import com.example.pre_project.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +28,6 @@ public interface UserService extends UserDetailsService {
 
     User getCurrentUser();
 
-    ResponseEntity<HttpStatus> castToAdmin(CastToAdminDTO castToAdminDTO);
+    ResponseEntity<HttpStatus> castToAdmin(PromoteRequest castToAdminDTO);
 }
 

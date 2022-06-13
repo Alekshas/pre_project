@@ -30,28 +30,25 @@ document.addEventListener('click', async event => {
     }
     if (add) {
         $.ajax({
-            type: 'PUT',
-            url: 'http://localhost:8080/users/',
+            type: 'POST',
+            url: 'http://localhost:8080/promoteRquest/',
             async: true,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
                 "id": event.target.dataset.id,
                 "wantToBeAdmin": "false",
-                "admin": "ADMIN"
             }),
             'success': function () {
                 let event = new Event("update-info");
                 document.dispatchEvent(event);
-                $('#message').html('<p id="message" class="alert alert-success my-3">Уведомление отправленно администраторам!</p>');
-                // console.log(data);
 
             }
         });
     }
     if (dismiss) {
         $.ajax({
-            type: 'PUT',
-            url: 'http://localhost:8080/users/',
+            type: 'POST',
+            url: 'http://localhost:8080/promoteRquest/',
             async: true,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -61,9 +58,6 @@ document.addEventListener('click', async event => {
             success : function () {
                 let event = new Event("update-info");
                 document.dispatchEvent(event);
-                $('#message').html('<p id="message" class="alert alert-success my-3">Уведомление отправленно администраторам!</p>');
-                // console.log(data);
-
             }
         });
     }

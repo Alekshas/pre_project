@@ -3,12 +3,10 @@ package com.example.pre_project.DTO;
 import lombok.Data;
 
 @Data
-public class CastToAdminDTO {
+public class PromoteRequest {
 
     private long id;
 
     private boolean wantToBeAdmin;
-
-    private String admin;
 
 }
