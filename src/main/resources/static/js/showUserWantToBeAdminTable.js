@@ -1,15 +1,14 @@
-getUsersFromBD()
-document.addEventListener("update-info", getUsersFromBD);
+getWhantToBeAdminUsersFromBD()
+document.addEventListener("update-info", getWhantToBeAdminUsersFromBD);
 
-async function getUsersFromBD() {
-    let promise = await fetch("http://localhost:8080/users")
+async function getWhantToBeAdminUsersFromBD() {
+    let promise = await fetch("http://localhost:8080/promoteRequest/users")
     promise.json()
         .then(users => {
             let table = document.getElementById("wantToBeAdminList");
             table.innerHTML = "";
 
             for (let i = 0; i < users.length; i++) {
-                if (users[i]['wantToBeAdmin'] === true) {
                     let roles = '';
                     for (let j = 0; j < users[i]['authorities'].length; j++) {
                         roles += users[i]['authorities'][j].role + " ";
@@ -40,7 +39,7 @@ async function getUsersFromBD() {
                             </button>
                         </td>   
                     </tr>`);
-                }
+
             }
         })
         .catch(error => {

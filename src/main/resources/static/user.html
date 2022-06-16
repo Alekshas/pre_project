@@ -75,20 +75,28 @@
                                         Хочу стать админом!
                                     </button>
                                     <script>
+                                        function info() {
+                                            $.ajax('http://localhost:8080/promoteRequest/info', {
+                                                async: false,
+                                                success: function () {
+                                                    document.getElementById('beAdminButton').disabled = true;
+                                                }
+                                            })
+                                        }
+                                        info();
                                         $(document).ready(async function () {
                                             $("#beAdminButton").click(function (e) {
                                                 e.preventDefault();
-                                                $.ajax({ //отправляем данные на сервер.
+                                                $.ajax({
                                                     type: 'GET',
-                                                    url: 'http://localhost:8080/promoteRquest',
+                                                    url: 'http://localhost:8080/promoteRequest',
                                                     async: true,
-                                                    dataType: "json",
-                                                    success: function () {
-                                                        alert("Уведомление отправленно администраторам!");
-
-                                                    }
+                                                    dataType: "json"
                                                 });
+                                                alert("Уведомление отправленно администраторам!");
+                                                info();
                                             });
+
                                         });
                                     </script>
                                 </div>

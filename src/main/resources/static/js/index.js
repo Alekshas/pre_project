@@ -31,12 +31,13 @@ document.addEventListener('click', async event => {
     if (add) {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/promoteRquest/',
+            url: 'http://localhost:8080/promoteRequest/',
             async: true,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
                 "id": event.target.dataset.id,
                 "wantToBeAdmin": "false",
+                "admin": "admin",
             }),
             'success': function () {
                 let event = new Event("update-info");
@@ -48,7 +49,7 @@ document.addEventListener('click', async event => {
     if (dismiss) {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/promoteRquest/',
+            url: 'http://localhost:8080/promoteRequest/',
             async: true,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

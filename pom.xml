@@ -8,8 +8,8 @@
         <version>2.5.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.nast</groupId>
-    <artifactId>bootstrap</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>pre_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>boot</name>
     <description>Demo project for Spring Boot</description>

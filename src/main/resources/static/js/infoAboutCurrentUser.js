@@ -13,9 +13,11 @@ async function getCurrentUser() {
     for (let i = 0; i < user.authorities.length; i++) {
         roles += user.authorities[i].role + " ";
     }
-    if (roles.includes("ADMIN") || user['wantToBeAdmin'] === true){
+
+   /* if (roles.includes("ADMIN") || user['wantToBeAdmin'] === true){
         document.getElementById('beAdminButton').disabled = true;
-    }
+    }*/
+
    /* if (!roles.includes("ADMIN")){
         document.getElementById('list-admin-list').hidden = true;
         document.getElementById('list-admin').hidden = true;

@@ -1,6 +1,6 @@
 package com.example.pre_project.service;
 
-import com.example.pre_project.DTO.PromoteRequest;
+import com.example.pre_project.DTO.PromoteRequestDTO;
 import com.example.pre_project.dao.UserDao;
 import com.example.pre_project.model.Role;
 import com.example.pre_project.model.User;
@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -45,14 +46,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<HttpStatus> setWantToBeAdmin() {
 
-        User currentUser = getById(getCurrentUser().getId());
-
-        currentUser.setWantToBeAdmin(true);
-
-
-        emailSenderService.sendMessageToAllAdmin(userDao.getAllAdminUsers(), getCurrentUser());
-
-        SecurityContextHolder.getContext().setAuthentication(null);
         return ResponseEntity.ok().build();
     }
 
@@ -73,7 +66,9 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setPassword(passwordEncoder().encode(user.getPassword()));
         }
+/*
         user.setWantToBeAdmin(getById(user.getId()).isWantToBeAdmin());
+*/
 
         userDao.update(user);
 
@@ -109,6 +104,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUserRoles(User user, Set<Role> roleSet) {
+        user.setRoles(roleSet);
+        userDao.update(user);
+    }
+
+    @Override
+    public ResponseEntity<HttpStatus> castToAdmin(PromoteRequestDTO castToAdminDTO) {
+        return null;
+    }
+
+   /* @Override
     public ResponseEntity<HttpStatus> castToAdmin(PromoteRequest castToAdminDTO) {
         User user = getById(castToAdminDTO.getId());
         if(!Objects.isNull(castToAdminDTO.getAdmin()) && castToAdminDTO.getAdmin().equals("ADMIN")){
@@ -116,7 +122,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setWantToBeAdmin(castToAdminDTO.isWantToBeAdmin());
         return ResponseEntity.ok().build();
-    }
+    }*/
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

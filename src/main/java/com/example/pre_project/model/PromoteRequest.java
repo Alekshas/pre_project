@@ -1,23 +1,29 @@
 package com.example.pre_project.model;
 
 import lombok.Data;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "promote_requests")
 public class PromoteRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column
+    private Long userID;
 
     @Column
-    private Long UserID;
+    private boolean wantToBeAdmin;
 
-    @Column
-    private String wantToBEAdmin;
 
+    public PromoteRequest(long id, boolean b) {
+        this.userID = id;
+        this.wantToBeAdmin = b;
+    }
 
 }
